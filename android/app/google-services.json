@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "1086512647272",
+    "firebase_url": "https://pete-oscar-challenge.firebaseio.com",
+    "project_id": "pete-oscar-challenge",
+    "storage_bucket": "pete-oscar-challenge.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086512647272:android:011d5aa73b632e72",
+        "android_client_info": {
+          "package_name": "com.lukenneth.oscarchallenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086512647272-34usgdle5q12pk680ellf1roh6vj4ja3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lukenneth.oscarchallenge",
+            "certificate_hash": "2146c29dded33d9fda909de715cdb04da9493a6c"
+          }
+        },
+        {
+          "client_id": "1086512647272-qb2nveoh9587as7m3b8o1ne2qblerrl6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbOSgFJfFzKl-apqk8ZBrSXTKqRXMLgY0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086512647272-qb2nveoh9587as7m3b8o1ne2qblerrl6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1086512647272-pa6ntd8bvau7isfa7rcral0i6i9qqrc4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lukenneth.oscar-challenge"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

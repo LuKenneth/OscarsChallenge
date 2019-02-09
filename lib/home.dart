@@ -13,17 +13,13 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import 'model/nominees_repository.dart';
 import 'model/classes.dart';
 import 'colors.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
+import 'model/more_info.dart';
 
 class HomePage extends StatelessWidget {
-  // TODO: Make a collection of cards (102)
-  // TODO: Add a variable for Category (104)
   Category category; 
 
   HomePage(this.category);
@@ -32,7 +28,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("NOMINEES", style: TextStyle(color: kOscarBackgroundWhite),), 
+        title: Text(category.name.toUpperCase(), style: TextStyle(color: kOscarBackgroundWhite),), 
         leading: IconButton(
           icon: Icon(
             Icons.menu,
@@ -62,13 +58,15 @@ class HomePage extends StatelessWidget {
     }
 
     final ThemeData theme = Theme.of(context);
-    final NumberFormat formatter = NumberFormat.simpleCurrency(
-      locale: Localizations.localeOf(context).toString());
     
     return products.map((nominee) {
       return GestureDetector (
         onTap: () {
-          Navigator.pop(context, nominee);
+          confirmDialog(context, nominee).then((chosen) {
+            if (chosen) {
+              Navigator.pop(context, nominee);
+            }
+          });
         },
           child: generateCard(theme, nominee)
       );
@@ -116,9 +114,58 @@ class HomePage extends StatelessWidget {
         return nomineeCard;
   }
 
-  Future<FirebaseUser>getUser() async {
+  Future<bool> confirmDialog(BuildContext context, Nominee nominee) {
+    return showDialog<bool>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Confirm Selection?'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('You are about to select ${nominee.name} for ${this.category.name}'),
+              Text(''),
+              Text('Are you sure?'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            textTheme: Theme.of(context).buttonTheme.textTheme,
+            textColor: kOscarDarkTan,
+            child: Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+          ),
+          FlatButton(
+            textTheme: Theme.of(context).buttonTheme.textTheme,
+            textColor: kOscarDarkTan,
+            child: Text('View Info'),
+            onPressed: () {
+              Navigator.push(context, 
+                MaterialPageRoute(builder: (context) => MoreInfo(nominee)),);
+            },
+          ),
+          RaisedButton(
+            textTheme: Theme.of(context).buttonTheme.textTheme,
+            child: Text('Select'),
+            textColor: kOscarBackgroundWhite,
+            color: kOscarDarkTan,
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
 
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    return user;
-  }
+  // Future<FirebaseUser>getUser() async {
+
+  //   FirebaseUser user = await FirebaseAuth.instance.currentUser();
+  //   return user;
+  // }
 }

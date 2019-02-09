@@ -18,24 +18,19 @@ import 'category_page.dart';
 import 'login.dart';
 import 'colors.dart';
 
-final ThemeData _kShrineTheme = _buildShrineTheme();
+final ThemeData _kTheme = _buildTheme();
 
-// TODO: Convert ShrineApp to stateful widget (104)
 class OscarChallengeApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Oscar Challenge',
-      // TODO: Change home: to a Backdrop with a HomePage frontLayer (104)
       home: CategoryPage(),
-      // TODO: Make currentCategory field take _currentCategory (104)
-      // TODO: Pass _currentCategory for frontLayer (104)
-      // TODO: Change backLayer field value to CategoryMenuPage (104)
       initialRoute: '/login',
       onGenerateRoute: _getRoute,
       // Add a theme (103)
-      theme: _kShrineTheme,
+      theme: _kTheme,
     );
   }
 
@@ -52,8 +47,7 @@ class OscarChallengeApp extends StatelessWidget {
   }
 }
 
-// Build a Shrine Theme (103)
-ThemeData _buildShrineTheme() {
+ThemeData _buildTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
     accentColor: kOscarLightTan,
@@ -65,10 +59,10 @@ ThemeData _buildShrineTheme() {
     scaffoldBackgroundColor: kOscarSurfaceWhite,
     cardColor: kOscarSurfaceWhite,
     textSelectionColor: kOscarDarkTan,
-    errorColor: kShrineErrorRed,
-    textTheme: _buildShrineTextTheme(base.textTheme),
-    primaryTextTheme: _buildShrineTextTheme(base.primaryTextTheme),
-    accentTextTheme: _buildShrineTextTheme(base.accentTextTheme),
+    errorColor: kErrorRed,
+    textTheme: _buildTextTheme(base.textTheme),
+    primaryTextTheme: _buildTextTheme(base.primaryTextTheme),
+    accentTextTheme: _buildTextTheme(base.accentTextTheme),
     primaryIconTheme: base.iconTheme.copyWith(
       color: kOscarLightTan,
     )
@@ -76,8 +70,7 @@ ThemeData _buildShrineTheme() {
   );
 }
 
-// Build a Shrine Text Theme (103)
-TextTheme _buildShrineTextTheme(TextTheme base) {
+TextTheme _buildTextTheme(TextTheme base) {
   return base.copyWith(
     headline: base.headline.copyWith(
       fontWeight: FontWeight.w500,

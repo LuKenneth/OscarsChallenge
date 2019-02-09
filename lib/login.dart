@@ -14,7 +14,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'model/classes.dart';
 
@@ -26,7 +25,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   var user;
 
@@ -52,7 +50,9 @@ class _LoginPageState extends State<LoginPage> {
             RaisedButton(
               child: Text('Sign In With Google'),
               onPressed: () {
-                _handleSignIn(context);
+                User("luke.k.patterson@gmail.com");
+                Navigator.pop(context);
+                // _handleSignIn(context);
               },
             ),
           ],
@@ -73,15 +73,11 @@ class _LoginPageState extends State<LoginPage> {
       catch(error) {
         print(error);
       }
-    GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-    FirebaseUser firebaseUser = await _auth.signInWithGoogle(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    prefs.setString('user', firebaseUser.email);
-    User(firebaseUser.email);
+
+    prefs.setString('user', googleUser.email);
+    User(googleUser.email);
     Navigator.pop(context);
-    return firebaseUser.email;
+    return googleUser.email;
       
     } 
     Navigator.pop(context);
